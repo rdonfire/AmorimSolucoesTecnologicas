@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AST | Amorim Soluções em Tecnologia</title>
+    <!-- Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fefefe;
+            color: #112c3d;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            padding: 20px 0;
+            background-color: #fefefe;
+            border-bottom: 1px solid rgba(35, 162, 205, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            background-color: rgba(254, 254, 254, 0.9);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #23a2cd, #112c3d);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fefefe;
+            font-weight: 800;
+            font-size: 24px;
+            box-shadow: 0 6px 12px rgba(35, 162, 205, 0.2);
+        }
+
+        .logo-text h2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: #112c3d;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: #23a2cd;
+        }
+
+        .logo-text p {
+            font-size: 13px;
+            font-weight: 600;
+            color: #23a2cd;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #112c3d;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #23a2cd;
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: #fefefe !important;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 16px rgba(37, 211, 102, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.02);
+            background-color: #20b859;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            padding: 80px 0 60px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #112c3d;
+            margin-bottom: 24px;
+        }
+
+        .hero-content h1 span {
+            color: #23a2cd;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(17, 44, 61, 0.8);
+            margin-bottom: 32px;
+            max-width: 90%;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: #23a2cd;
+            color: #fefefe;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 12px 24px rgba(35, 162, 205, 0.25);
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #112c3d;
+            box-shadow: 0 16px 28px rgba(17, 44, 61, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #112c3d;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1.5px solid #23a2cd;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(35, 162, 205, 0.05);
+            border-color: #112c3d;
+        }
+
+        .hero-image {
+            background: linear-gradient(145deg, rgba(35, 162, 205, 0.08), rgba(17, 44, 61, 0.03));
+            border-radius: 32px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 24px;
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #23a2cd 0%, #112c3d 100%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fefefe;
+            font-weight: 600;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.05);
+        }
+
+        /* ===== SERVIÇOS ===== */
+        .servicos {
+            padding: 80px 0;
+            background-color: rgba(35, 162, 205, 0.02);
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: #112c3d;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #23a2cd;
+            text-align: center;
+            margin-bottom: 56px;
+            font-weight: 500;
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .servico-card {
+            background: #fefefe;
+            padding: 36px 24px;
+            border-radius: 28px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.02);
+            border: 1px solid rgba(35, 162, 205, 0.1);
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .servico-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 40px rgba(35, 162, 205, 0.06);
+            border-color: #23a2cd;
+        }
+
+        .servico-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(35, 162, 205, 0.08);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+            color: #23a2cd;
+            font-size: 32px;
+        }
+
+        .servico-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #112c3d;
+        }
+
+        .servico-card p {
+            color: rgba(17, 44, 61, 0.75);
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        .servico-link {
+            color: #23a2cd;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== CULTURA (VALORES) ===== */
+        .cultura {
+            padding: 80px 0;
+        }
+
+        .cultura-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .cultura-card {
+            background: #fefefe;
+            padding: 40px 28px;
+            border-radius: 24px;
+            border: 1px solid rgba(35, 162, 205, 0.12);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+        }
+
+        .cultura-card h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #112c3d;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cultura-card h3 i {
+            color: #23a2cd;
+            font-size: 28px;
+        }
+
+        .valores-lista {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .valores-lista li {
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: flex;
+            gap: 12px;
+        }
+
+        .valores-lista li strong {
+            color: #23a2cd;
+            min-width: 110px;
+        }
+
+        /* ===== SEÇÃO CONTATO ===== */
+        .contato {
+            padding: 80px 0;
+            background-color: #fefefe;
+        }
+
+        .contato-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .info-contato {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(35, 162, 205, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #23a2cd;
+            font-size: 24px;
+        }
+
+        .info-text h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #112c3d;
+            margin-bottom: 4px;
+        }
+
+        .info-text p {
+            color: rgba(17, 44, 61, 0.8);
+        }
+
+        .mapa-container {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(35, 162, 205, 0.1);
+            height: 100%;
+            min-height: 350px;
+        }
+
+        .mapa-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ===== CTA FINAL ===== */
+        .cta-final {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #112c3d 0%, #1a4257 100%);
+            border-radius: 48px 48px 0 0;
+            margin-top: 40px;
+            color: #fefefe;
+        }
+
+        .cta-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .cta-content p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-light {
+            background-color: #fefefe;
+            color: #112c3d;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .btn-light:hover {
+            background-color: #23a2cd;
+            color: #fefefe;
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #0f2631;
+            color: #fefefe;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo span {
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .footer-copy {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* ===== WHATSAPP FIXO ===== */
+        .whatsapp-fixo {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: #fefefe;
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: 0.2s;
+        }
+
+        .whatsapp-fixo:hover {
+            transform: scale(1.08);
+            background-color: #20b859;
+        }
+
+        /* Responsivo */
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-content h1 {
+                font-size: 42px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .cultura-grid {
+                grid-template-columns: 1fr;
+            }
+            .contato-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-content {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">AST</div>
+                <div class="logo-text">
+                    <h2>AST <span>•</span> AMORIM</h2>
+                    <p>Soluções em Tecnologia</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#inicio">Início</a>
+                <a href="#solucoes">Soluções</a>
+                <a href="#valores">Sobre</a>
+                <a href="#contato">Contato</a>
+                <a href="https://wa.me/5521982313179?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Fale Conosco</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- HERO SECTION (Início) -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Suporte de TI que <span>realmente funciona</span> para sua empresa</h1>
+                    <p>Reduza custos, aumente a produtividade e tenha tranquilidade com uma equipe técnica especializada. Atendimento ágil e transparente.</p>
+                    <div class="hero-cta">
+                        <a href="https://wa.me/5521982313179?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento" class="btn-primary" target="_blank"><i class="fab fa-whatsapp"></i> Falar com Especialista</a>
+                        <a href="#solucoes" class="btn-outline">Conheça nossos planos <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="placeholder-img">
+                        <i class="fas fa-laptop-code" style="font-size: 64px; margin-right: 12px;"></i> 
+                        <span style="font-size: 24px;">AST Tech</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVIÇOS (Soluções) -->
+    <section id="solucoes" class="servicos">
+        <div class="container">
+            <h2 class="section-title">Nossas Soluções em TI</h2>
+            <p class="section-subtitle">Tudo o que sua empresa precisa em um só lugar</p>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Suporte Técnico 24/7</h3>
+                    <p>Atendimento remoto e presencial com SLA garantido. Resolvemos problemas rapidamente.</p>
+                    <a href="#" class="servico-link">Saiba mais <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3>Infraestrutura Cloud</h3>
+                    <p>Migração, gestão de servidores, backup e segurança para ambientes híbridos e nuvem.</p>
+                    <a href="#" class="servico-link">Saiba mais <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Segurança da Informação</h3>
+                    <p>Proteção contra ameaças, firewall, antivírus gerenciado e políticas de acesso.</p>
+                    <a href="#" class="servico-link">Saiba mais <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Consultoria em TI</h3>
+                    <p>Planejamento estratégico, redução de custos e implantação de novas tecnologias.</p>
+                    <a href="#" class="servico-link">Saiba mais <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CULTURA ORGANIZACIONAL (Sobre / Valores) -->
+    <section id="valores" class="cultura">
+        <div class="container">
+            <h2 class="section-title">Nossa Essência</h2>
+            <p class="section-subtitle">O que nos move todos os dias</p>
+            <div class="cultura-grid">
+                <div class="cultura-card">
+                    <h3><i class="fas fa-bullseye"></i> Missão</h3>
+                    <p><em>"Proporcionar tranquilidade e eficiência tecnológica aos nossos clientes, entregando soluções em TI personalizadas que impulsionam o crescimento e a continuidade dos negócios."</em></p>
+                </div>
+                <div class="cultura-card">
+                    <h3><i class="fas fa-eye"></i> Visão</h3>
+                    <p><em>"Ser a principal referência em consultoria e soluções tecnológicas na região, reconhecida pela excelência técnica e pelo atendimento humanizado até 2030."</em></p>
+                </div>
+                <div class="cultura-card">
+                    <h3><i class="fas fa-gem"></i> Valores</h3>
+                    <ul class="valores-lista">
+                        <li><strong>Transparência:</strong> Clareza total em processos e diagnósticos.</li>
+                        <li><strong>Agilidade:</strong> Resposta rápida em um mundo que não pode parar.</li>
+                        <li><strong>Inovação:</strong> Busca constante pelas melhores ferramentas.</li>
+                        <li><strong>Parceria:</strong> Somos parte do time do cliente.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO CONTATO (com mapa) -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2 class="section-title">Onde estamos</h2>
+            <p class="section-subtitle">Visite-nos ou entre em contato</p>
+            <div class="contato-grid">
+                <div class="info-contato">
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-text">
+                            <h4>Endereço</h4>
+                            <p>Rua Paçuaré, 1061 - Cosmos<br>Rio de Janeiro - RJ, 23058-230</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="info-text">
+                            <h4>Telefone / WhatsApp</h4>
+                            <p>(21) 98231-3179</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="info-text">
+                            <h4>E-mail</h4>
+                            <p>contato@astamorim.com.br</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-clock"></i></div>
+                        <div class="info-text">
+                            <h4>Horário de Atendimento</h4>
+                            <p>Segunda a Sexta: 8h às 18h<br>Sábado: 9h às 13h</p>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/5521982313179?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento" class="btn-primary" style="margin-top: 16px; justify-content: center;" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Enviar mensagem
+                    </a>
+                </div>
+                <div class="mapa-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.886902362123!2d-43.5923456844869!3d-22.90574288500791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9be6b7e2f5a7f1%3A0x2c2e2f1c2e2e2e2e!2sRua%20Pa%C3%A7uar%C3%A9%2C%201061%20-%20Cosmos%2C%20Rio%20de%20Janeiro%20-%20RJ%2C%2023058-230!5e0!3m2!1spt-BR!2sbr!4v1650000000000!5m2!1spt-BR!2sbr" 
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Pronto para elevar o nível da TI da sua empresa?</h2>
+                <p>Fale agora com um de nossos especialistas e receba um diagnóstico gratuito.</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/5521982313179?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento" class="btn-light" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp (21) 98231-3179</a>
+                    <a href="#contato" class="btn-primary" style="background: transparent; border: 2px solid #fefefe; box-shadow: none;">Ver no mapa</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-microchip" style="color: #23a2cd;"></i>
+                <span>AST Amorim Soluções em Tecnologia</span>
+            </div>
+            <div class="footer-copy">
+                © 2025 - Todos os direitos reservados.
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Botão WhatsApp fixo -->
+<a href="https://wa.me/5521982313179?text=Ol%C3%A1%2C%20gostaria%20de%20fazer%20um%20or%C3%A7amento" class="whatsapp-fixo" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+</body>
+</html>
