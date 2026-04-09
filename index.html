@@ -58,18 +58,9 @@
             gap: 12px;
         }
 
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(145deg, #23a2cd, #112c3d);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fefefe;
-            font-weight: 800;
-            font-size: 24px;
-            box-shadow: 0 6px 12px rgba(35, 162, 205, 0.2);
+        .logo img {
+            height: 70px;
+            width: auto;
         }
 
         .logo-text h2 {
@@ -207,30 +198,11 @@
             border-color: #112c3d;
         }
 
-        .hero-image {
-            background: linear-gradient(145deg, rgba(35, 162, 205, 0.08), rgba(17, 44, 61, 0.03));
-            border-radius: 32px;
-            padding: 20px;
-            text-align: center;
-        }
-
         .hero-image img {
-            max-width: 100%;
+            width: 100%;
             height: auto;
             border-radius: 24px;
-        }
-
-        .placeholder-img {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #23a2cd 0%, #112c3d 100%);
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fefefe;
-            font-weight: 600;
-            box-shadow: 0 20px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
         }
 
         /* ===== SERVIÇOS ===== */
@@ -499,7 +471,12 @@
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        .footer-logo img {
+            height: 35px;
+            width: auto;
         }
 
         .footer-logo span {
@@ -566,7 +543,7 @@
     <div class="container">
         <div class="header-content">
             <div class="logo">
-                <img src="logo-nobackground.png" alt="AST Amorim Soluções em Tecnologia" style="height: 50px; width: auto; margin-right: 12px;">
+                 <img src="logo-nobackground.png" alt="AST Amorim Soluções em Tecnologia" style="height: 140px; width: auto; margin-right: auto;">
                 <div class="logo-text">
                     <h2>AST <span>•</span> AMORIM</h2>
                     <p>Soluções em Tecnologia</p>
@@ -597,82 +574,79 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="placeholder-img">
-                        <i class="fas fa-laptop-code" style="font-size: 64px; margin-right: 12px;"></i> 
-                        <span style="font-size: 24px;">AST Tech</span>
-                    </div>
+                    <!-- Imagem profissional de tecnologia (Unsplash) - você pode substituir pela sua própria depois -->
+                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=2070&auto=format&fit=crop" alt="Equipe de suporte de TI trabalhando">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SERVIÇOS (Soluções) -->
-    <!-- SERVIÇOS (Soluções) -->
-<section id="solucoes" class="servicos">
-    <div class="container">
-        <h2 class="section-title">Nossas Soluções em TI</h2>
-        <p class="section-subtitle">Tudo o que sua empresa precisa em um só lugar</p>
-        <div class="servicos-grid">
-            
-            <!-- Card 1: Suporte Técnico -->
-            <div class="servico-card">
-                <div class="servico-icon"><i class="fas fa-headset"></i></div>
-                <h3>Suporte Técnico 24/7</h3>
-                <p>Atendimento remoto e presencial com SLA garantido. Resolvemos problemas rapidamente para manter seu negócio funcionando.</p>
+    <section id="solucoes" class="servicos">
+        <div class="container">
+            <h2 class="section-title">Nossas Soluções em TI</h2>
+            <p class="section-subtitle">Tudo o que sua empresa precisa em um só lugar</p>
+            <div class="servicos-grid">
+                
+                <!-- Suporte Técnico -->
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Suporte Técnico 24/7</h3>
+                    <p>Atendimento remoto e presencial com SLA garantido. Resolvemos problemas rapidamente.</p>
+                </div>
+                
+                <!-- Manutenção de Computadores -->
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-laptop-medical"></i></div>
+                    <h3>Manutenção de Computadores</h3>
+                    <p>Diagnóstico, limpeza preventiva, troca de peças (HD, SSD, memória, fonte) e upgrade.</p>
+                </div>
+                
+                <!-- Manutenção de Impressoras -->
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-print"></i></div>
+                    <h3>Manutenção de Impressoras</h3>
+                    <p>Limpeza, troca de peças, configuração de rede e solução de falhas de impressão.</p>
+                </div>
+                
+                <!-- Manutenção de Celulares -->
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Manutenção de Celulares</h3>
+                    <p>Troca de tela, bateria, reparo de placa e recuperação de dados para Android e iOS.</p>
+                </div>
+                
+                <!-- Criação de Sites -->
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Criação de Sites</h3>
+                    <p>Sites institucionais, landing pages e lojas virtuais. Design moderno e responsivo.</p>
+                </div>
+                
+                <!-- Infraestrutura Cloud -->
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3>Infraestrutura Cloud</h3>
+                    <p>Migração, gestão de servidores, backup em nuvem e segurança para ambientes híbridos.</p>
+                </div>
+                
+                <!-- Segurança da Informação -->
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Segurança da Informação</h3>
+                    <p>Proteção contra ameaças, firewall, antivírus gerenciado e políticas de acesso.</p>
+                </div>
+                
+                <!-- Consultoria em TI -->
+                <div class="servico-card">
+                    <div class="servico-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Consultoria em TI</h3>
+                    <p>Planejamento estratégico, redução de custos e implantação de novas tecnologias.</p>
+                </div>
+                
             </div>
-            
-            <!-- Card 2: Manutenção de Computadores -->
-            <div class="servico-card">
-                <div class="servico-icon"><i class="fas fa-laptop-medical"></i></div>
-                <h3>Manutenção de Computadores</h3>
-                <p>Diagnóstico, limpeza preventiva, troca de peças (HD, SSD, memória, fonte) e upgrade de desempenho para desktop e notebook.</p>
-            </div>
-            
-            <!-- Card 3: Manutenção de Impressoras -->
-            <div class="servico-card">
-                <div class="servico-icon"><i class="fas fa-print"></i></div>
-                <h3>Manutenção de Impressoras</h3>
-                <p>Limpeza de cabeçote, troca de peças, configuração de rede e solução de falhas de impressão. Atendemos todas as marcas.</p>
-            </div>
-            
-            <!-- Card 4: Manutenção de Celulares -->
-            <div class="servico-card">
-                <div class="servico-icon"><i class="fas fa-mobile-alt"></i></div>
-                <h3>Manutenção de Celulares</h3>
-                <p>Troca de tela, bateria, reparo de placa e recuperação de dados para smartphones Android e iOS.</p>
-            </div>
-            
-             <!-- Criação de Sites -->
-            <div class="servico-card">
-                <div class="servico-icon"><i class="fas fa-laptop-code"></i></div>
-                <h3>Criação de Sites</h3>
-                <p>Desenvolvimento de sites institucionais, landing pages e lojas virtuais. Design moderno, responsivo e otimizado para Google.</p>
-            </div>
-            
-            <!-- Card 5: Infraestrutura Cloud -->
-            <div class="servico-card">
-                <div class="servico-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                <h3>Infraestrutura Cloud</h3>
-                <p>Migração, gestão de servidores, backup em nuvem e segurança para ambientes híbridos.</p>
-            </div>
-            
-            <!-- Card 6: Segurança da Informação -->
-            <div class="servico-card">
-                <div class="servico-icon"><i class="fas fa-shield-alt"></i></div>
-                <h3>Segurança da Informação</h3>
-                <p>Proteção contra ameaças, firewall, antivírus gerenciado e políticas de acesso para sua empresa.</p>
-            </div>
-            
-            <!-- Card 7: Consultoria em TI -->
-            <div class="servico-card">
-                <div class="servico-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>Consultoria em TI</h3>
-                <p>Planejamento estratégico, redução de custos e implantação de novas tecnologias sob medida.</p>
-            </div>
-            
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- CULTURA ORGANIZACIONAL (Sobre / Valores) -->
     <section id="valores" class="cultura">
@@ -741,6 +715,7 @@
                     </a>
                 </div>
                 <div class="mapa-container">
+                    <!-- Substitua o src pelo código de incorporação correto do Google Maps para o endereço exato -->
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.886902362123!2d-43.5923456844869!3d-22.90574288500791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9be6b7e2f5a7f1%3A0x2c2e2f1c2e2e2e2e!2sRua%20Pa%C3%A7uar%C3%A9%2C%201061%20-%20Cosmos%2C%20Rio%20de%20Janeiro%20-%20RJ%2C%2023058-230!5e0!3m2!1spt-BR!2sbr!4v1650000000000!5m2!1spt-BR!2sbr" 
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
@@ -767,7 +742,7 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-logo">
-                <i class="fas fa-microchip" style="color: #23a2cd;"></i>
+                <img src="logo.png" alt="AST">
                 <span>AST Amorim Soluções em Tecnologia</span>
             </div>
             <div class="footer-copy">
